@@ -9,36 +9,39 @@ import { ProductService } from './product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  day: number = 0;
+  currentDay: number = 0;
   products: any[] = [
     {
       name: 'Special Full Coverage',
       sellIn: 15,
-      price: '$20'
+      price: 20
     }, {
 
       name: 'Full Coverage',
       sellIn: 2,
-      price: '$0'
+      price: 0
     }, {
       name: 'Mega Coverage',
       sellIn: 0,
-      price: '$80'
+      price: 80
     }, {
 
       name: 'Super Sale',
       sellIn: 3,
-      price: '$6'
+      price: 6
     }
   ]
 
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
-
+    
   }
 
-  updateNextDay() {
-    this.productService.updatePrice(this.products);
+  updatePrice() {
+    if (this.currentDay <= 30) {
+      this.currentDay++;
+      this.products = this.productService.updatePrice(this.products);
+    }
   }
 }
